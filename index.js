@@ -11,10 +11,11 @@ const io = require('socket.io')(server)
 app.use(express.static(__dirname + '/public'))
 
 function onConnection(socket) {
-  console.log('connect ', socket.id)
-  socket.on('drawing', data => {
-    console.log('SOCKET DATA:', data)
-  })
+    console.log('connect ', socket.id)
+    socket.on('drawing', data => {
+        console.log('SOCKET DATA:', data)
+        socket.broadcast.emit('drawing', data)
+    })
 }
 
 // what is diff b/w onConnect and connection
